@@ -22,7 +22,7 @@
             <a href="/post/${post.id}" class="post-link">
                 <div class="card text-white bg-dark my-3 post">
 
-                    <img src="/images/${post.previewImageId}"
+                    <img src="https://i.ibb.co/0DBykf3/graphic-tablet-1-2.png"
                          class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">${post.title}</h5>
