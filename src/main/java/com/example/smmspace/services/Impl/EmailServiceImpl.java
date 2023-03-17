@@ -6,9 +6,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 
 @Service
 public class EmailServiceImpl implements EmailService {
+    private static Logger logger = Logger.getLogger(EmailServiceImpl.class.getName());
 
     private static final String NOREPLY_ADDRESS = "bukachvladislav@gmail.com";
 
@@ -23,7 +26,6 @@ public class EmailServiceImpl implements EmailService {
             message.setSubject(subject);
             message.setText(text);
             emailSender.send(message);
-
-        System.out.println("All it`s good");
+            logger.info("All it`s good");
     }
 }

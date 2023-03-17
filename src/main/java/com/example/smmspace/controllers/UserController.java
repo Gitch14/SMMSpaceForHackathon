@@ -53,6 +53,10 @@ public class UserController {
         }
         return "redirect:/activate";
     }
+
+
+
+
     /* Recover Pass*/
         @GetMapping("/recover")
         public String emailSendForgot(Principal principal,Model model) {
@@ -102,7 +106,7 @@ public class UserController {
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("userByPrincipal", userServiceImpl.getUserByPrincipal(principal));
-        model.addAttribute("posts", user.getProducts());
+        model.addAttribute("posts", user.getPosts());
         return "user-info";
     }
 

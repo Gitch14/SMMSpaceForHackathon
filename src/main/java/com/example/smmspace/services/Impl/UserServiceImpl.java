@@ -14,12 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private static Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,7 +35,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.ROLE_USER);
         user.setActivationCode(UUID.randomUUID().toString());
-        log.info("Saving new User with email: {}", email);
+        logger.info("Saving new User with email: {"+email+"}");
         userRepository.save(user);
 
             String message =String.format(
@@ -41,6 +43,7 @@ public class UserServiceImpl implements UserService {
                     user.getUsername(),user.getActivationCode()
             );
           //  mailSenderService.sendSimpleMessage(user.getEmail(), "Activation code",message);
+        logger.info("Activation code send on email: {"+email+"}");
 
 
         return true;
@@ -57,6 +60,7 @@ public class UserServiceImpl implements UserService {
                 user.getUsername(),code
         );
         mailSenderService.sendSimpleMessage(user.getEmail(), "Code",message);
+        logger.info("Activation code for new password send on email: {"+email+"}");
 
         boolean verify = false;
 
@@ -79,10 +83,10 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             if (user.isActive()) {
                 user.setActive(false);
-                log.info("Ban user with id = {}; email: {}", user.getId(), user.getEmail());
+                logger.info("Ban user with id = {"+user.getId()+"}; email: {"+user.getEmail()+"}");
             } else {
                 user.setActive(true);
-                log.info("Unban user with id = {}; email: {}", user.getId(), user.getEmail());
+                logger.info("Unban user with id = {"+user.getId()+"}; email: {"+user.getEmail()+"}");
             }
         }
         userRepository.save(user);
@@ -115,6 +119,7 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
 
         userRepository.save(user);
+        logger.info("User {"+user.getName()+"} activate your account");
         return true;
     }
 
@@ -125,6 +130,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setDescription(description);
         userRepository.save(user);
+        logger.info("User {"+user.getName()+"} create or edit your description");
     }
 
     @Override
@@ -141,6 +147,7 @@ public class UserServiceImpl implements UserService {
         user.setForgotCode(newCode);
         userRepository.save(user);
         mailSenderService.sendSimpleMessage(user.getEmail(), "Code",message);
+        logger.info("User {"+user.getName()+"} forgot your password and send code for reset your password");
     }
 
     @Override
@@ -155,5 +162,6 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword(passwordEncoder.encode(pass1));
         userRepository.save(user);
+        logger.info("User {"+user.getName()+"} successfully changed your password");
     }
 }

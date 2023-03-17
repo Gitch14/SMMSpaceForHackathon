@@ -1,6 +1,9 @@
 package com.example.smmspace.models;
 
 import com.example.smmspace.models.enums.Role;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,6 +11,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@Data
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
@@ -41,95 +45,6 @@ public class User implements UserDetails {
         post.setUser(this);
         posts.add(post);
     }
-
-    public boolean isAdmin() {
-        return roles.contains(Role.ROLE_ADMIN);
-    }
-
-    public Image getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Image avatar) {
-        this.avatar = avatar;
-    }
-
-    public List<Post> getProducts() {
-        return posts;
-    }
-
-    public void setProducts(List<Post> posts) {
-        this.posts = posts;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getActivationCode() {
-        return activationCode;
-    }
-
-    public void setActivationCode(String activationCode) {
-        this.activationCode = activationCode;
-    }
-
-    public String getForgotCode() {
-        return forgotCode;
-    }
-
-    public void setForgotCode(String forgotCode) {
-        this.forgotCode = forgotCode;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
 
     // security config
 

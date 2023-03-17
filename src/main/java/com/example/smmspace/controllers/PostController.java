@@ -79,7 +79,7 @@ public class PostController {
     public String userProducts(Principal principal, Model model) {
         User user = postServiceImpl.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("posts", user.getProducts());
+        model.addAttribute("posts", user.getPosts());
         return "my-posts";
     }
 
@@ -87,7 +87,7 @@ public class PostController {
     public String userCreateProducts(Principal principal, Model model) {
         User user = postServiceImpl.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("posts", user.getProducts());
+        model.addAttribute("posts", user.getPosts());
         return "create";
     }
 
