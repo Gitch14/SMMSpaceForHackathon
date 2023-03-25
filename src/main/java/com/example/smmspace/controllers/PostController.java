@@ -59,7 +59,7 @@ public class PostController {
         model.addAttribute("authorPost", post.getUser());
         String contextPath = request.getContextPath();
         model.addAttribute("requestContext", contextPath);
-        return "posts-info";
+        return "posts-info1";
     }
 
 

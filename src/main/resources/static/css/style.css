@@ -260,6 +260,7 @@ svg.bd-placeholder-img{
 img.post{
     height: 500px!important;
     width: 100%;
+    margin-left: 100px;
 }
 
 .create-h1 {

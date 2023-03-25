@@ -20,12 +20,6 @@
         <h4>Description: </h4> <br>
         <p><b>${user.description}</b></p>
         <br>
-        <#if user.isAdmin()>
-            <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
-               href="/admin">
-                Panel administration
-            </a><br>
-        </#if>
     <div class="profile-btn">
         <a class="btn btn-dark mb-3" style="text-align: center; width: 50%"
            href="/my/posts">
